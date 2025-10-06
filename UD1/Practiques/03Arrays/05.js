@@ -1,0 +1,1 @@
+//5. Genera un array de 100 números aleatoris sencers entre 0 i 9. Fes que siguen 0 totes les caselles des de la 25 fins a la 75.
