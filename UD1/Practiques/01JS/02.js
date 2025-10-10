@@ -1,9 +1,8 @@
 import { forEach, randomInt } from "mathjs";
 
 var array = [];
-for (var i = 0; i < 15; i++){
-    var num = randomInt(0,100);
-    console.log(num);
+for (let i = 0; i < 15; i++){
+    var num = randomInt(0,101);
     array.push(num);
 }
 

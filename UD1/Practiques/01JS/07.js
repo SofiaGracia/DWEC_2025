@@ -18,37 +18,23 @@ const bomba = 'B';
 const marcat = 'x';
 var quantitatBombes = 10;
 
-function mostrarTaulerVisible() {
-    // console.log(' 1|2|3|4|5|');
-    // for (var i = 0; i < columnes; i++) {
-
-    //     console.log(i + 1);
-    //     taulerVisible[i] = [];
-    //     for (var j = 0; j < files; j++) {
-
-    //         console.log(taulerVisible[i][j]);
-    //     }
-    // }
-}
-
-//Inicialitzem el tauler visible
-for (var i = 0; i < columnes; i++) {
-    taulerVisible[i] = [];
-    for (var j = 0; j < files; j++) {
-        taulerVisible[i][j] = segur;
+function inicialitzarTauler(tauler) {
+    for (var i = 0; i < columnes; i++) {
+        tauler[i] = [];
+        for (var j = 0; j < files; j++) {
+            tauler[i][j] = segur;
+        }
     }
 }
 
+//Inicialitzem el tauler visible
+inicialitzarTauler(taulerVisible);
 console.log(taulerVisible);
 
 //Necessite dos matrius
 var taulerInvisible = [];
-for (var i = 1; i <= columnes; i++) {
-    taulerInvisible[i] = [];
-    for (var j = 1; j <= files; j++) {
-        taulerInvisible[i][j] = segur;
-    }
-}
+inicialitzarTauler(taulerInvisible);
+
 
 //Ara he de posar les bombes
 var contBombes = 0;
@@ -66,28 +52,33 @@ while (contBombes < quantitatBombes) {
 }
 
 //El joc continuarà fins que es descobrisquen totes les bombes o l'usuari decideixi parar.
-var seguir_jugant = true;
-while (quantitatBombes > 0 && seguir_jugant) {
+while (quantitatBombes > 0) {
 
-    var resposta = prompt('Seguir jugant? (s/S/n/N): ');
-    if (resposta == 'n' || resposta == 'N'){
-        seguir_jugant = false;
+    var resposta = prompt('Parar el joc? (s/S/n/N): ');
+    if (resposta == 's' || resposta == 'S') {
+        break;
     }
 
     var resCol = parseInt(prompt('Coordenada Y: '));
     var resFil = parseInt(prompt('Coordenada X: '));
 
-    console.log('');
-    console.log(typeof (resCol), typeof (resFil));
-    console.log('El que hi ha: ', taulerInvisible[resCol][resFil]);
-    console.log('');
+    // console.log('');
+    // console.log(typeof (resCol), typeof (resFil));
+    // console.log('El que hi ha: ', taulerInvisible[resCol][resFil]);
+    // console.log('');
 
     var missatge = "";
-    if (taulerInvisible[resCol][resFil] == bomba) {
-        quantitatBombes--;
-        missatge = 'Has marcat una bomba';
-        console.log(missatge);
-        taulerVisible[resCol - 1][resFil - 1] = bomba;
+    if (taulerInvisible[resCol - 1][resFil - 1] == bomba) {
+
+        //Comprovar que no s'haja marcat una bomba que ja s'ha descobert
+        if (taulerVisible[resCol - 1][resFil - 1] == bomba) {
+            console.log('Ja has marcat esta bomba');
+        } else {
+            quantitatBombes--;
+            missatge = 'Has marcat una bomba';
+            console.log(missatge);
+            taulerVisible[resCol - 1][resFil - 1] = bomba;
+        }
 
     } else {
 
@@ -96,4 +87,8 @@ while (quantitatBombes > 0 && seguir_jugant) {
         taulerVisible[resCol - 1][resFil - 1] = marcat;
     }
     console.log(taulerVisible);
+}
+
+if (quantitatBombes == 0){
+    console.log('***Has trobat les bombes***');
 }

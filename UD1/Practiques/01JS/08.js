@@ -12,10 +12,11 @@ var num_a_generar = 6;
 var cont = 0;
 var numeros = [];
 
+//Generem els numeros aleatoris
 while (cont < num_a_generar){
 
     //Generem un num aleatori
-    var num_alea = getRandomInt(1, 9);
+    var num_alea = getRandomInt(1, 50);
 
     var ja_existeix = false;
     numeros.forEach((num) => {
@@ -34,9 +35,11 @@ while (cont < num_a_generar){
 
 console.log(numeros);
 
+//Demanem els numeros
 var input = prompt('Introdueix 6 numeros (num, num, ...): ');
 var num_input = input.split(',');
 
+//Controlem la quantitat i si s'han introduit numeros
 if (num_input.length != 6){
     console.log("No s'han introduit 6 numeros");
 }else{
@@ -65,7 +68,7 @@ for (i = 0; i < num_input.length; i++){
         if(actual == numeros[j]){
             console.log(actual == numeros[j]);
             encertats.push(actual);
-            llevar_numero = j;
+            llevar_numero = j;//Obtenim l'index per llevar-lo dels numeros ja que ja s'ha acertat
             break;
         }
     }

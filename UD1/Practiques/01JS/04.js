@@ -1,33 +1,33 @@
 import { forEach, randomInt } from "mathjs";
 
-/**
- * 
- */
-var max = -1;
-var index = 0;
-
-var arrayOrdenat = [];
-var array = [];
+var arrayRandom = [];
 for (var i = 0; i < 15; i++) {
     var num = randomInt(0, 100);
-    // console.log(num);
-    array.push(num);
+    arrayRandom.push(num);
 }
 
-console.log(array)
+console.log(arrayRandom)
+
+//Trobar el màxim
+var max = arrayRandom[0];
+arrayRandom.forEach((num) => max = num > max ? num : max);
+console.log('Max: ',max);
+
+//Ordenar de menor a major
+var arrayOrdenat = [];
+var index = 0;
+var min = arrayRandom[0];
 
 for (var j = 0; j < 15; j++) {
-    for (var i = 0; i < array.length; i++) {
-        if (array[i] > max) {
-            max = array[i];
+    for (var i = 0; i < arrayRandom.length; i++) {
+        if (arrayRandom[i] < min) {
+            min = arrayRandom[i];
             index = i;
         }
     }
-    array.splice(index, 1);
-    arrayOrdenat.push(max);
-    max = -1
+    arrayRandom.splice(index, 1);
+    arrayOrdenat.push(min);
+    min = max;
 }
 
 console.log(arrayOrdenat);
-
-
