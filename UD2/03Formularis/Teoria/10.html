@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>establir focus</title>
+</head>
+
+<body>
+    <form id="formulario" action="#">
+        <input type="text" id="primero" />
+    </form>
+
+    <script>
+        if (document.forms.length > 0) {
+            if (document.forms[0].elements.length > 0) {
+                document.forms[0].elements[0].focus();
+            }
+        }
+    </script>
+</body>
+
+</html>

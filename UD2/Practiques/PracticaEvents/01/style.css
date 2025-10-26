@@ -1,0 +1,32 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #f9eadc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 1rem;
+    font-family: sans-serif;
+}
+
+.screen {
+    display: none;
+    padding: 2rem;
+    text-align: center;
+}
+
+.screen.active {
+    display: block;
+}
+
+.product-item {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  margin: 5px;
+}

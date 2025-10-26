@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ca">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemple :valid i :invalid</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        input {
+            display: block;
+            margin-bottom: 15px;
+            padding: 8px;
+            font-size: 16px;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            width: 300px;
+            transition: all 0.3s ease;
+        }
+
+        input:valid {
+            border-color: green;
+            background-color: #d4edda;
+            /* verd clar */
+        }
+
+        input:invalid {
+            border-color: red;
+            background-color: #f8d7da;
+            /* vermell clar */
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Exemple :valid i :invalid</h1>
+    <form>
+        <label>
+            Correu electrònic (required):
+            <input type="email" required placeholder="Escriu el teu email">
+        </label>
+
+        <label>
+            Nom (mínim 3 lletres):
+            <input type="text" pattern="[A-Za-z]{3,}" placeholder="Nom">
+        </label>
+
+        <button type="submit">Enviar</button>
+    </form>
+
+</body>
+
+</html>

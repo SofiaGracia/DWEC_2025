@@ -21,6 +21,5 @@ for (i = 1; i <= files; i++) {
 
 //Recorrer la matriu:
 matriu.forEach((fila) => {
-    fila.forEach((columna) => process.stdout.write(columna)); //https://stackoverflow.com/questions/6157497/printing-to-console-without-a-trailing-newline
-    console.log('\n');
+    fila.forEach((columna) => console.log(columna));
 });

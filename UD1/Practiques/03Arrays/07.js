@@ -10,13 +10,11 @@ const paraules = ['ordinador', 'cpu', 'gpu', 'caragol', 'pantalla', 'gat', 'reto
 
 var paraulesTotes = "";
 
-// console.log(paraulesTotes.concat('',paraules[0]));
-
 // var totes = paraules.forEach((paraula) => paraulesTotes.concat('',paraula)); //Undefined
 // var totes = paraules.map((paraula) => paraulesTotes.concat('',paraula)); //Nou array
 // console.log(totes);
 
-
+//Per axiò gaste un fori
 for (i = 0; i < paraules.length; i++){
     paraulesTotes = paraulesTotes.concat('',paraules[i]);
 }

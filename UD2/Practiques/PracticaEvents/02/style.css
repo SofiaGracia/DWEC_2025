@@ -1,0 +1,31 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #f9eadc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 1rem;
+    font-family: sans-serif;
+}
+
+td {
+  border: 1px solid #dddddd;
+  text-align: center;
+  padding: 15px;
+}
+
+.screen {
+    display: none;
+    padding: 2rem;
+    text-align: center;
+}
+
+.screen.active {
+    display: block;
+}

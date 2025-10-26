@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Ejemplo de Formulario</title>
+    <style>
+        /* Estil bàsic del formulari */
+        form {
+            display: flex;
+            flex-direction: column;
+            width: 300px;
+        }
+
+        input {
+            margin-bottom: 10px;
+            padding: 5px;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        /* Camp vàlid */
+        input:valid {
+            border-color: green;
+            background-color: #e6ffe6;
+        }
+
+        /* Camp no vàlid */
+        input:invalid {
+            border-color: red;
+            background-color: #ffe6e6;
+        }
+
+        /* Botó */
+        button {
+            padding: 8px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        span {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Formulario de Ejemplo</h1>
+
+    <form action="/submit" method="post" id="myForm" novalidate><!-- 1. Posem el no validate-->
+
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" pattern="^[A-Za-z]{3,}$" required><br>
+
+        <label for="correo">Correo electrónico:</label>
+        <input type="email" id="correo" name="correo" pattern="\S+@\S+\.\S+" required><br>
+
+        <label for="contrasena">Contraseña:</label>
+        <input type="password" id="contrasena" name="contrasena" minlength="8" required><br>
+
+        <label for="fecha_nacimiento">Fecha de nacimiento:</label>
+        <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" required><br>
+
+        <label for="numero">Número de teléfono:</label>
+        <input type="tel" id="numero" name="numero" pattern="^[0-9]{9}$" required><br>
+
+        <label for="checkbox">Acepto los términos y condiciones:</label>
+        <input type="checkbox" id="checkbox" name="aceptar_terminos" required><br>
+
+        <label for="radio1">Opción 1:</label>
+        <input type="radio" id="radio1" name="opcion" value="opcion1" required><br>
+
+        <label for="radio2">Opción 2:</label>
+        <input type="radio" id="radio2" name="opcion" value="opcion2" required><br>
+
+        <label for="seleccion">Seleccione una opción:</label>
+        <!-- Ací no faria falta posar required pq sempre hi ha una opció seleccionada -->
+        <select id="seleccion" name="seleccion">
+            <option value="opcion1">Opción 1</option>
+            <option value="opcion2">Opción 2</option>
+            <option value="opcion3">Opción 3</option>
+        </select><br>
+
+        <label for="area_texto">Comentarios:</label>
+        <textarea id="area_texto" rows="4" name="comentarios" cols="50" pattern="^[A-Za-z]{3,}$"
+            required></textarea><br>
+
+        <input type="submit" value="Enviar" id="submitBtn" disabled>
+    </form>
+    <script>
+
+        function posarMissatgeADataError() {
+
+            //Obtenim tots els inputs que tindrán un span a continuació
+            var inputsSelectTextArea = document.querySelectorAll("input:not([value='Enviar']), textarea");
+
+            const errorElementsText = 'Els elements de text han de tindre un tamany mínim de 3 lletres';
+            const errorInput = 'Introdueix un/a ';
+            const errorRequerit = 'Este camp és requerit';
+            const errorSelecio = 'Marca una opció';
+            const errorTemes = 'Selecciona almenys dos temes';
+
+            //Llista d'errors en ordre segons els elements del formulari
+            var errors = [errorElementsText, errorInput + 'correu', 'La contrasena ha de ser de 8 caracters minim', errorRequerit, errorInput + 'numero', errorRequerit, errorSelecio, errorSelecio, errorElementsText, errorTemes, errorTemes, errorTemes];
+
+            var cont = 0;
+            inputsSelectTextArea.forEach((element) => {
+                element.setAttribute('data-error', errors[cont]);
+                cont++;
+            });
+
+            console.log(inputsSelectTextArea);
+
+        }
+
+        function posarSpanATotsElsInputs() {
+
+            let formulari = document.querySelector('#myForm');
+
+            //Nodes del formulari
+            var elementsForm = formulari.childNodes;
+
+            //Convertim els childNodes a una llista de elements HTML
+            var llistaElements = Array.from(elementsForm);
+
+            var indexOnPosarElSpan = [];
+
+            //Recorrem la llista d'elements HTML per saber en quin index posar els spans
+            for (let i = 0; i < llistaElements.length; i++) {
+
+                if (llistaElements[i].tagName != null && ((llistaElements[i].tagName.toLowerCase() == 'input' && (llistaElements[i].id != "radio1" && llistaElements[i].id != "checkbox1" && llistaElements[i].id != "checkbox2")) || llistaElements[i].tagName.toLowerCase() == 'select' || llistaElements[i].tagName.toLowerCase() == 'textarea')) {
+                    indexOnPosarElSpan.push(i + 1);
+                }
+            }
+
+            //Ara posarem els spans a llistaElements
+            indexOnPosarElSpan.pop();// Per evitar posar el span en el botó d'enviar
+            for (let i = 0; i < indexOnPosarElSpan.length; i++) {
+
+                //Ara creem el span
+                const spanTag = document.createElement('span');
+                spanTag.ariaLive = 'polite';
+
+                //I insertem el span en la posició que volem
+                llistaElements.splice(indexOnPosarElSpan[i] + i, 0, spanTag);
+            }
+
+            //Ara hi ha que posar esta llista d'elements nous en el formulari
+            formulari.innerHTML = "";
+
+            llistaElements.forEach((element) => {
+                formulari.appendChild(element);
+            });
+        }
+
+        function posarOLlevarMissatgeASpan(camp, llevar) {
+            let proximEl = camp.nextElementSibling;
+
+            while (proximEl.tagName.toLowerCase() != 'span') {
+                proximEl = proximEl.nextElementSibling;
+            }
+
+            proximEl.innerText = llevar ? '' : camp.getAttribute('data-error');
+        }
+
+        function validarCBTemes() {
+
+            var checkBoxes = document.querySelectorAll('.temes');
+            var llistaCB = Array.from(checkBoxes).filter((box) => box.checked);
+            return llistaCB.length >= 2;
+        }
+
+        function validarRadio() {
+            var radioTags = document.querySelectorAll("input[type='radio']");
+            var marcat = false;
+            for (const r of radioTags) {
+                if (r.checked) return true;
+            }
+            return false;
+        }
+
+        function checkEsUnTagAValidar(tag) {
+            return tag.tagName.toLowerCase() == 'input' || tag.tagName.toLowerCase() == 'select' || tag.tagName.toLowerCase() == 'textarea';
+        }
+
+        function validarCampSegonsTipus(camp) {
+            let valid = true;
+            if (camp.classList.contains('temes')) {
+                return validarCBTemes();
+            }
+
+            if (camp.attributes[0] == 'radio') {
+                return validarRadio();
+            }
+
+            if (!camp.validity.valid) {
+                console.log('El camp és invalid');
+                return false;
+            }
+            return valid;
+        }
+
+        function checkHabilitarBotoEnviar() {
+
+            var totsElements = document.querySelectorAll("input:not([value='Enviar']), select, textarea");
+
+            var totsElementsLlista = Array.from(totsElements);
+            var eleValids = totsElementsLlista.filter(validarCampSegonsTipus);
+
+            document.querySelector('#submitBtn').disabled = totsElementsLlista.length != eleValids.length;
+        }
+
+        function checkCampsAnteriors(e) {
+
+            var element = e.currentTarget;
+
+            var tagsAnteriors = [element];
+            let ant = element.previousElementSibling;
+
+            while (ant) {
+
+                if (checkEsUnTagAValidar(ant)) {
+                    tagsAnteriors.push(ant);
+                }
+                ant = ant.previousElementSibling;
+            }
+
+            //Ara posem el error als span dels elements anteriors
+            tagsAnteriors.forEach((camp) => {
+                posarOLlevarMissatgeASpan(camp, validarCampSegonsTipus(camp));
+            });
+
+            //Ara fem check si podem habilitar el botó d'enviar
+            checkHabilitarBotoEnviar();
+        }
+
+        //Creem els checkbox per a l'apartat de temes (3 temes)
+        const formulari = document.querySelector('form');
+
+        const botoEnviar = document.querySelector('#submitBtn');
+        botoEnviar.parentNode.removeChild(botoEnviar);
+
+        for (i = 1; i < 4; i++) {
+
+            const labelCB = document.createElement('label');
+            labelCB.htmlFor = 'checkbox' + i;
+            labelCB.innerText = 'Tema ' + i;
+
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.id = 'checkbox' + i;
+            checkbox.classList.add('temes');
+
+            formulari.appendChild(labelCB);
+            formulari.appendChild(checkbox);
+        }
+
+        formulari.appendChild(botoEnviar);
+
+        posarSpanATotsElsInputs();
+        posarMissatgeADataError();
+
+        //Obtenim tots els inputs que tenen un span a continuació
+        var elementsAComprovar = document.querySelectorAll("input:not([value='Enviar']), select, textarea");
+
+        //Cada vegada que ixim del element es comprovarà si este és vàlid
+        elementsAComprovar.forEach((e) => {
+            e.addEventListener('blur', checkCampsAnteriors);
+        });
+
+        // Afegir un esdeveniment de submit al formulari per prevenir l'enviament si no està vàlid
+        document.getElementById('myForm').addEventListener('submit', function (event) {
+            if (!document.getElementById('submitBtn').disabled) {
+                alert('Formulari enviat amb èxit!');
+            }
+            event.preventDefault();
+        });
+
+
+    </script>
+
+</body>
+
+</html>

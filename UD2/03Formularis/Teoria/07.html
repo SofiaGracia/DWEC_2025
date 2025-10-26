@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>radiobutton</title>
+</head>
+
+<body>
+    <form id="formulario">
+        <label>
+            <input type="radio" value="si" name="pregunta" id="pregunta_si" /> SI
+        </label>
+        <label>
+            <input type="radio" value="no" name="pregunta" id="pregunta_no" /> NO
+        </label>
+        <label>
+            <input type="radio" value="nsnc" name="pregunta" id="pregunta_nsnc" /> NS/NC
+        </label>
+
+        <button type="button" onclick="mostrarSeleccion()">Mostrar seleccionats</button>
+    </form>
+
+    <script>
+        function mostrarSeleccion() {
+            var elementos = document.getElementsByName("pregunta");
+
+            for (var i = 0; i < elementos.length; i++) {
+                alert("Elemento: " + elementos[i].value + "\nSeleccionat: " + elementos[i].checked);
+            }
+        }
+    </script>
+</body>
+
+</html>

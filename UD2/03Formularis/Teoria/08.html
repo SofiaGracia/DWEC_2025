@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>checkbox</title>
+</head>
+
+<body>
+    <form id="formulario">
+        <input type="checkbox" value="condiciones" name="condiciones" id="condiciones" /> He leído y acepto las
+        condiciones
+        <input type="checkbox" value="privacidad" name="privacidad" id="privacidad" /> He leído la política de
+        privacidad
+
+        <button type="button" onclick="mostrarSeleccion()">Mostrar seleccionats</button>
+    </form>
+
+    <script>
+        function mostrarSeleccion() {
+            var elemento = document.getElementById("condiciones");
+            alert(" Elemento: " + elemento.value + "\n Seleccionado: " + elemento.checked);
+
+            elemento = document.getElementById("privacidad");
+            alert(" Elemento: " + elemento.value + "\n Seleccionado: " + elemento.checked);
+        }
+    </script>
+</body>
+
+</html>

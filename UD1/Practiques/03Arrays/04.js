@@ -24,4 +24,6 @@ while (arrayAleatori.length < quatitatNum) {
     }
 }
 
-console.log(arrayAleatori);
+//console.log(arrayAleatori);
+
+arrayAleatori.forEach((num) => console.log(num));

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Ejemplo de Formulario</title>
+    <style>
+        /* Estil bàsic del formulari */
+        form {
+            display: flex;
+            flex-direction: column;
+            width: 300px;
+        }
+
+        input {
+            margin-bottom: 10px;
+            padding: 5px;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        /* Botó */
+        button {
+            padding: 8px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Formulario de Ejemplo</h1>
+
+    <form action="/submit" method="post">
+
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre"><br>
+
+        <label for="correo">Correo electrónico:</label>
+        <input type="email" id="correo" name="correo"><br>
+
+        <label for="contrasena">Contraseña:</label>
+        <input type="password" id="contrasena" name="contrasena"><br>
+
+        <label for="fecha_nacimiento">Fecha de nacimiento:</label>
+        <input type="date" id="fecha_nacimiento" name="fecha_nacimiento"><br>
+
+        <label for="numero">Número de teléfono:</label>
+        <input type="tel" id="numero" name="numero"><br>
+
+        <label for="checkbox">Acepto los términos y condiciones:</label>
+        <input type="checkbox" id="checkbox" name="aceptar_terminos"><br>
+
+        <label for="radio1">Opción 1:</label>
+        <input type="radio" id="radio1" name="opcion" value="opcion1"><br>
+
+        <label for="radio2">Opción 2:</label>
+        <input type="radio" id="radio2" name="opcion" value="opcion2"><br>
+
+        <label for="seleccion">Seleccione una opción:</label>
+        <select id="seleccion" name="seleccion">
+            <option value="opcion1">Opción 1</option>
+            <option value="opcion2">Opción 2</option>
+            <option value="opcion3">Opción 3</option>
+        </select><br>
+
+        <label for="area_texto">Comentarios:</label>
+        <textarea id="area_texto" name="comentarios" rows="4" cols="50"></textarea><br>
+
+        <input type="submit" value="Enviar" onclick="mostrarSeleccion()">
+    </form>
+    <script>
+        //Llig tots els camps del formulari i mostra el que ha emplenat l'usuari en fer el submitt en un alert.
+        function mostrarSeleccion() {
+
+            var inputs = document.querySelectorAll("input");
+
+            var inputsArray = Array.from(inputs).map(eleHTML => eleHTML.value);
+            var primersCincCamps = inputsArray.slice(0, 5);
+
+            var campsPlens = primersCincCamps.filter((valor) => valor.trim().length > 0);
+
+            //Checkbox
+            var checkInput = document.getElementById('checkbox');
+            if (checkInput.checked) {
+                campsPlens.push("S'ha acceptat les condicions");
+            }
+
+            //RadioButton
+            var radioButtons = document.getElementsByName("opcion");
+            if (radioButtons[0].checked) {
+                campsPlens.push('opció 0 seleccionada'); //Es selecciona una opció però no apareix en pantalla
+            } else if (radioButtons[1].checked) {
+                campsPlens.push('opció 1 seleccionada');
+            }
+
+            //Seleccion
+            var llistaSelec = document.getElementById('seleccion');
+
+            var index = llistaSelec.selectedIndex;
+
+            var opcioSelec = llistaSelec.options[index];
+            var valorSelec = opcioSelec.value;
+            campsPlens.push(valorSelec);
+
+            //TextArea
+            var textArea = document.querySelector('#area_texto');
+            if (textArea.value.trim().length > 0) {
+                campsPlens.push(textArea.value.trim());
+            }
+
+            alert(campsPlens.join("\n"));
+        }
+    </script>
+
+</body>
+
+</html>

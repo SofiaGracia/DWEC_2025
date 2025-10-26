@@ -33,15 +33,7 @@ const rebaixat = original.map(function (fila) {
 console.log('REBAIXAT:');
 console.log(rebaixat);
 console.log();
-//Aquells productes que el seu preu siga major de 75€
-// const preuMajor75 = original.map(function (fila) {
-//     if (fila[1] > 75){
-//         return [fila[0], fila[1]]
-//     }
-// }); //Em dona undefined
 
-// const preuMajor75 = original.filter((fila) => fila[1] > 75);//Pero no sé com fer lo de la rebaixa del 10% si no tenim els preus originals
-// console.log(preuMajor75);
 
 //3. Ara apliquem el filtre
 const matriuRequisits = rebaixat.filter(function (el, i){

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>evitar reenviament</title>
+</head>
+
+<body>
+    <form id="formulario">
+        <input type="checkbox" value="condiciones" name="condiciones" id="condiciones" /> He leído y acepto las
+        condiciones
+        <input type="checkbox" value="privacidad" name="privacidad" id="privacidad" /> He leído la política de
+        privacidad
+
+        <input type="button" value="Enviar" onclick="this.disabled=true; this.value='Enviando...'; this.form.submit()" />
+    </form>
+
+</body>
+
+</html>
