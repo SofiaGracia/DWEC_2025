@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        window.onload = function () {
+
+            // Emmagatzemar una Cookie:
+            document.cookie = "usuari=Sofia";
+            document.cookie = "preferencia=color=verd";
+
+            // Modificar una cookie
+            //document.cookie = "usuari=NouValor; expires=Thu, 01 Jan 2099 00:00:00 UTC";
+            document.cookie = "usuari=Roser";
+
+            // Eliminar una cookie: Assigna-li una data d'expiració que sigui anterior a la data i hora actual.
+            // document.cookie = "usuari=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+
+            // Llegir Cookies:
+            var totesLesCookies = document.cookie;
+            var cookiesSeparades = totesLesCookies.split('; ');
+            for (var i = 0; i < cookiesSeparades.length; i++) {
+                var cookie = cookiesSeparades[i];
+                var [nom, valor] = cookie.split('=');
+                console.log(nom + ": " + valor);
+            }
+
+            // Quan no poses data d'expiració a una cookie expira en tancar la sessió? Comprova-ho...
+            // Sí, la cookie no es guarda. Mentre que si poses una data d'expiració  posterior a la data i hora actual esta cookie sí que es guarda.
+        }
+    </script>
+</body>
+
+</html>

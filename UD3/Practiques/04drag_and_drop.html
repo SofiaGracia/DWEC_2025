@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drag and Drop Exemple</title>
+    <style>
+        .draggable {
+            cursor: move;
+
+        }
+
+        .dropzone {
+            width: 300px;
+            height: 250px;
+            border: 2px dashed #2ecc71;
+
+        }
+
+        .contenidor {
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+
+<body>
+    
+    <div id="contenidor">
+        <img id="draggableElement" class="draggable" draggable="true" src="https://picsum.photos/200" alt="imatge">
+        <br>
+
+        <div id="dropzone" class="dropzone">
+            Deixa anar aquí
+        </div>
+
+    </div>
+
+
+    <script>
+        const draggableElement = document.getElementById('draggableElement');
+        const dropzone = document.getElementById('dropzone');
+
+        // Event listener per iniciar l'arrossega
+        draggableElement.addEventListener('dragstart', function (event) {
+            // Guardar l'identificador de l'element arrossegat
+            event.dataTransfer.setData('text/plain', draggableElement.id);
+        });
+
+        // Event listener per permetre el soltar
+        dropzone.addEventListener('dragover', function (event) {
+            event.preventDefault(); // Prevenir el comportament per defecte que impedeix el soltar
+        });
+
+        // Event listener per gestionar el soltar
+        dropzone.addEventListener('drop', function (event) {
+            event.preventDefault(); // Prevenir el comportament per defecte que impedeix el soltar
+
+            // Obtindre l'identificador de l'element arrossegat
+            const draggedElementId = event.dataTransfer.getData('text/plain');
+
+            // Obtindre l'element arrossegat
+            const draggedElement = document.getElementById(draggedElementId);
+
+            // Afegir l'element arrossegat a la dropzone
+            dropzone.appendChild(draggedElement);
+        });
+    </script>
+
+</body>
+
+</html>

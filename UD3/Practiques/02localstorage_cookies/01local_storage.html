@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LocalStorage</title>
+</head>
+
+<body>
+    <script>
+        //Guarda informació teua com nom, cognoms, email, etc en local storage i després accedeix a ella.
+        window.onload = function () {
+
+            const nom = 'Sofia';
+            const cognom = 'Gracia';
+            const email = 'sofia@gmail.com'
+
+            // Emmagatzemar un valor
+            localStorage.setItem('nom', nom);
+            localStorage.setItem('cognom', cognom);
+            localStorage.setItem('email', email);
+
+            // Recuperar un valor
+            var nomRecuperat = localStorage.getItem('nom');
+            var cognomRecuperat = localStorage.getItem('cognom');
+            var emailRecuperat = localStorage.getItem('email');
+
+            alert(nomRecuperat + '\n' + cognomRecuperat + '\n' + emailRecuperat);
+
+            // Eliminar un valor
+            localStorage.removeItem('nom');
+            localStorage.removeItem('cognom');
+            localStorage.removeItem('email');
+        }
+
+    </script>
+</body>
+
+</html>
