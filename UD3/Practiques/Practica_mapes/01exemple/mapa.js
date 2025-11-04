@@ -57,12 +57,14 @@ window.onload = function () {
     // adding markers to the layer pointsA
     for (let i = 0; i < pointsA.length; i++) {
         marker = L.marker([pointsA[i][0], pointsA[i][1]]).bindPopup(pointsA[i][2]);
+        marker.draggable = true;
         pA.addLayer(marker);
     }
 
     // adding markers to the layer pointsB
     for (let i = 0; i < pointsB.length; i++) {
         marker = L.marker([pointsB[i][0], pointsB[i][1]]).bindPopup(pointsB[i][2]);
+        marker.draggable = true;
         pB.addLayer(marker);
     }
 
